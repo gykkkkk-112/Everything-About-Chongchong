@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>假期规划助手 | Vibe Planner (Gemini AI 版)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1 class="logo">假期规划助手 <span>/ VIBE PLANNER (AI)</span></h1>
+            <p class="subtitle">由 Gemini 大模型驱动。在有限的精力下，持续推进真正重要的事情。拒绝焦虑，弹性前行。</p>
+        </header>
+
+        <div class="main-layout">
+            <section class="input-panel card">
+                <h2 class="section-title">01 / 输入你的假期</h2>
+                
+                <form id="planner-form">
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="start-date">开始日期</label>
+                            <input type="date" id="start-date" required>
+                        </div>
+                        <div class="col">
+                            <label for="end-date">结束日期</label>
+                            <input type="date" id="end-date" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fixed-events">固定占用时间的事项 <span class="tip">(如：旅行5天、驾校练车、实习，逗号分隔)</span></label>
+                        <input type="text" id="fixed-events" placeholder="旅行5天, 陪伴家人" value="旅行5天, 陪伴家人">
+                    </div>
+
+                    <div class="form-group">
+                        <label>你想完成的目标 <span class="tip">(自由输入，支持添加多个)</span></label>
+                        <div class="tag-input-wrapper">
+                            <input type="text" id="target-input" placeholder="输入目标按回车添加 (如：GRE备考、看电影)">
+                            <button type="button" id="add-tag-btn">添加</button>
+                        </div>
+                        <div id="tags-container" class="tags-container"></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="time-investment">每周愿意投入的时间</label>
+                            <select id="time-investment">
+                                <option value="low">很少 (5小时以内)</option>
+                                <option value="medium" selected>一般 (5-15小时)</option>
+                                <option value="high">较多 (15-30小时)</option>
+                                <option value="max">非常多 (30小时以上)</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="self-eval">自我评价</label>
+                            <select id="self-eval">
+                                <option value="procrastinator" selected>经常拖延 (需要极低摩擦)</option>
+                                <option value="sometimes">偶尔拖延 (需要适当弹性)</option>
+                                <option value="master">自律达人 (可以安排密集些)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
+                        <label for="api-key" style="color: var(--light-green);">🔑 Gemini API Key</label>
+                        <input type="text" id="api-key" placeholder="AIzaSy..." value="">
+                        <span class="tip" style="display:block; margin-top:4px;">密钥仅保存在你本地浏览器中，绝不上传第三方。</span>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn-primary">让 Gemini 帮我解构计划...</button>
+                </form>
+            </section>
+
+            <section class="output-panel card">
+                <div class="output-header">
+                    <h2 class="section-title">02 / 你的专属氛围规划</h2>
+                    <div class="action-buttons">
+                        <button id="btn-copy" class="btn-secondary" style="display:none;">复制文本计划</button>
+                        <button id="btn-clear" class="btn-link">重置</button>
+                    </div>
+                </div>
+
+                <div id="output-placeholder" class="placeholder-text">
+                    <p>输入信息和 API Key 后，点击生成。</p>
+                    <p class="quote">“完美的计划是一场暴政，而好的计划是一层提供安全感的护甲。”</p>
+                </div>
+
+                <div id="output-loading" class="placeholder-text" style="display:none;">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 15px; color: var(--light-green);">Gemini 正在深度思考你的生活节奏，请稍候...</p>
+                </div>
+
+                <div id="output-content" class="output-content" style="display:none;">
+                    <div id="anxiety-alert" class="alert-box" style="display:none;"></div>
+
+                    <div class="output-block">
+                        <h3>[ 假期总览 ]</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item"><span class="label">总天数:</span> <span id="stat-total-days" class="val">0</span>天</div>
+                            <div class="stat-item"><span class="label">精力预算模型:</span> <span id="stat-free-time" class="val">0</span></div>
+                        </div>
+                    </div>
+
+                    <div class="output-block">
+                        <h3>[ 目标优先级洞察 ]</h3>
+                        <ul id="priority-analysis-list" class="diary-list"></ul>
+                    </div>
+
+                    <div class="output-block main-tracks">
+                        <h3>[ 本次假期的三条主线 ]</h3>
+                        <div id="main-tracks-container"></div>
+                    </div>
+
+                    <div class="output-block">
+                        <h3>[ 每周弹性行动建议 ]</h3>
+                        <p class="block-intro">无需卡死每天日程，本周内任意时间完成即可：</p>
+                        <ul id="weekly-suggestions-list" class="diary-list check-list"></ul>
+                    </div>
+
+                    <div class="output-block">
+                        <h3>[ 渐进式成就拆解 / 告别挫败感 ]</h3>
+                        <div id="achievement-system-container" class="achievement-grid"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

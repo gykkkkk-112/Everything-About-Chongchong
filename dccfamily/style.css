@@ -1,0 +1,399 @@
+/* ==========================================================================
+   1. 变量定义与基础复位
+   ========================================================================== */
+:root {
+    --bg-color: #f5f4f0;       /* 柔和的物质感仿古白 */
+    --text-main: #1a1a1a;      /* 深炭黑 */
+    --text-muted: #666666;     /* 浅灰 */
+    --font-serif: 'Playfair Display', 'Noto Serif SC', serif;
+    --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   2. 电影胶片颗粒特效 (Film Grain)
+   ========================================================================== */
+.film-grain {
+    position: fixed;
+    top: -50%; left: -50%; right: -50%; bottom: -50%;
+    width: 200%; height: 200%;
+    /* 使用微型动态噪点 SVG 作为背景 */
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    animation: grainAnimation 8s steps(10) infinite;
+}
+
+@keyframes grainAnimation {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-1%, -1%); }
+    30% { transform: translate(-2%, -2%); }
+    50% { transform: translate(-1%, 2%); }
+    70% { transform: translate(1%, -2%); }
+    90% { transform: translate(-2%, 1%); }
+}
+
+/* ==========================================================================
+   3. 欢迎落页样式 (Hero)
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1449247709967-d4461a6a6103?q=80&w=1200') center/cover no-repeat;
+    opacity: 0.15;
+    filter: grayscale(100%);
+    animation: slowZoom 20s ease-out infinite alternate;
+}
+
+@keyframes slowZoom {
+    0% { transform: scale(1.05); }
+    10% { transform: scale(1); }
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+    max-width: 600px;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.hero-content h1 {
+    color: #fff;
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    margin-bottom: 2rem;
+}
+
+.hero-subtitle {
+    color: #b3b3b3;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+}
+
+.enter-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: #999;
+    padding: 12px 35px;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.enter-btn:hover {
+    border-color: #fff;
+    color: #fff;
+    letter-spacing: 0.25em;
+}
+
+/* ==========================================================================
+   4. 主案卷与模块样式 (Archive Sections)
+   ========================================================================== */
+.main-archive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    animation: fadeInPage 1.5s ease forwards;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.archive-section {
+    padding: 100px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-number {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+}
+
+.section-header h2 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+/* 族谱网格排版 */
+.matrix-grid {
+    display: grid;
+    /* grid-template-cols: repeat(auto-fit, minmax(300px, 1fr)); */
+    gap: 50px;
+}
+
+.member-card {
+    cursor: pointer;
+    padding-bottom: 20px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.5s;
+}
+
+.member-card:hover {
+    border-color: var(--text-main);
+}
+
+.photo-wrapper {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-color: #e0e0e0;
+    overflow: hidden;
+    filter: grayscale(100%) brightness(90%);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    margin-bottom: 20px;
+}
+
+.member-card:hover .photo-wrapper {
+    filter: grayscale(20%) brightness(100%);
+    transform: scale(1.02);
+}
+
+.photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    /* object-cover: cover; */
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.card-meta h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.year-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.card-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* 数字旧物博物馆排版 */
+.objects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.object-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background: rgba(255,255,255,0.4);
+    padding: 30px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.object-photo {
+    width: 160px;
+    height: 160px;
+    filter: grayscale(100%);
+    overflow: hidden;
+}
+
+.object-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.object-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+.badge {
+    font-size: 0.65rem;
+    background: #e8e5dd;
+    padding: 3px 8px;
+    letter-spacing: 0.05em;
+    color: #555;
+}
+
+.object-info h3 {
+    font-family: var(--font-serif);
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.object-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* 5. 结尾留白 */
+.epilogue-section {
+    padding: 150px 0 50px 0;
+    text-align: center;
+}
+
+.epilogue-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 2;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    color: #444;
+}
+
+.divider {
+    width: 40px;
+    height: 1px;
+    background-color: var(--text-muted);
+    margin: 0 auto 30px auto;
+}
+
+.footer-meta {
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+}
+
+/* ==========================================================================
+   5. 侧边隐藏档案卡面板 (Drawer Overlay)
+   ========================================================================== */
+.archive-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    visibility: hidden;
+    transition: visibility 0.5s;
+}
+
+.archive-drawer.active {
+    visibility: visible;
+}
+
+.drawer-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.archive-drawer.active .drawer-overlay {
+    opacity: 1;
+}
+
+.drawer-content {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--bg-color);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+    padding: 40px;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow-y: auto;
+}
+
+.archive-drawer.active .drawer-content {
+    transform: translateX(0);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.drawer-data-photo {
+    width: 120px;
+    aspect-ratio: 3/4;
+    filter: grayscale(100%);
+    margin-bottom: 20px;
+}
+
+.drawer-data-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+.drawer-body h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.drawer-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
+
+.drawer-bio {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #444;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留存的痕迹 — 家族数字档案空间</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="style.js" defer></script>
+</head>
+<body>
+
+    <div class="film-grain"></div>
+
+    <header class="hero-section" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="animate-fade-in">家族馆藏</h1>
+            <p class="hero-subtitle">“时间将一切风化为碎片。我们在此拼接散落的肖像、书信与物件。”</p>
+            <button class="enter-btn" id="enterBtn">开启记忆空间</button>
+        </div>
+    </header>
+
+    <main class="main-archive hidden" id="mainArchive">
+        
+        <section class="archive-section">
+            <div class="section-header">
+                <span class="section-number">ARCHIVE // 01</span>
+                <h2>血脉与回响</h2>
+            </div>
+            
+            <div class="matrix-grid">
+                <div class="member-card" data-member="1">
+                    <div class="photo-wrapper">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600" alt="顾长风">
+                    </div>
+                    <div class="card-meta">
+                        <h3>顾长风</h3>
+                        <span class="year-label">1912 — 1988</span>
+                    </div>
+                    <p class="card-role">祖父 / 寻路者</p>
+                </div>
+
+                <div class="member-card" data-member="2">
+                    <div class="photo-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600" alt="苏曼华">
+                    </div>
+                    <div class="card-meta">
+                        <h3>苏曼华</h3>
+                        <span class="year-label">1918 — 2005</span>
+                    </div>
+                    <p class="card-role">祖母 / 守护者</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="archive-section">
+            <div class="section-header">
+                <span class="section-number">ARCHIVE // 02</span>
+                <h2>物质的记忆</h2>
+            </div>
+            <div class="objects-container">
+                <div class="object-item">
+                    <div class="object-photo">
+                        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?q=80&w=600" alt="未寄出的家书">
+                    </div>
+                    <div class="object-info">
+                        <span class="badge">手稿文献</span>
+                        <h3>1942年的未寄家书</h3>
+                        <p class="object-desc">纸张已严重泛黄，字迹因当年的雨水有些许洇散，依稀可辨‘见字如面’四字。这是在旧箱子夹层中偶然发现的。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="epilogue-section">
+            <p class="epilogue-text">“当最后的旋律散去，照片褪为白纸，那些深邃的足迹并非不曾存在。”</p>
+            <div class="divider"></div>
+            <p class="footer-meta">FAMILY ARCHIVE © 2026</p>
+        </footer>
+
+    </main>
+
+    <div class="archive-drawer" id="archiveDrawer">
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+        <div class="drawer-content">
+            <button class="close-btn" id="close
