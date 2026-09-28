@@ -1,0 +1,69 @@
+body {
+  background-color: #121212;
+  color: #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #ff1a1a;
+}
+
+.btn-clear {
+  background-color: #444;
+}
+
+.btn-clear:hover {
+  background-color: #666;
+}
+
+.overdue-notice {
+  background-color: #fffcf8; 
+  color: #111;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 25px;
+  margin: 15px 0;
+  border: 3px solid #cc0000; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  white-space: pre-wrap; 
+  position: relative;
+}
+
+.overdue-notice::after {
+  content: "GOO GOO G'JOOB";
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  font-size: 38px;
+  font-weight: bold;
+  color: rgba(204, 0, 0, 0.12);
+  transform: rotate(-20deg);
+  pointer-events: none;
+  border: 4px solid rgba(204, 0, 0, 0.12);
+  padding: 5px 15px;
+}
