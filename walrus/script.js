@@ -3,7 +3,7 @@ let grammar;
 // Collage《I Am the Walrus》
 let data = {
   start: [
-    "⚠️ URGENT COLLECTION NOTICE ⚠️\n==========================================\nISSUER: #agency#\nACCOUNT ID: WALRUS-1967-#code#\nSTATUS: OVERDUE (#days_late# DAYS LATE)\n------------------------------------------\nDEBTOR: #debtor#\n\nUNPAID CHARGES & ABSURD VIOLATIONS:\n#charge_item#\n#charge_item#\n#charge_item#\n------------------------------------------\nBASE DEBT: $#subtotal#\nSTUPID BLOODY TUESDAY SURCHARGE: $#penalty#\nTOTAL OVERDUE AMOUNT: $#total#\n------------------------------------------\nPAYMENT DUE: WHILE WAITING FOR THE SUN\n\nLEGAL & SHAKESPEAREAN WARNING:\n#warning#\n=========================================="
+    "⚠️ URGENT COLLECTION NOTICE ⚠️\n==========================================\nISSUER: #agency#\nACCOUNT ID: WALRUS-1967-#code#\nSTATUS: OVERDUE (#days_late# DAYS LATE)\n------------------------------------------\nDEBTOR: #debtor#\n\nUNPAID CHARGES & ABSURD VIOLATIONS:\n#charge_item#\n#charge_item#\n#charge_item#\n------------------------------------------\nBASE DEBT: $#subtotal#\nSTUPID BLOODY TUESDAY SURCHARGE: $#penalty#\nTOTAL OVERDUE AMOUNT: $#total#\n------------------------------------------\nPAYMENT DUE: WHILE WAITING FOR THE SUN\n\nLEGAL WARNING:\n#warning#\n=========================================="
   ],
 
   agency: [
